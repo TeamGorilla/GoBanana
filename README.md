@@ -22,3 +22,6 @@ To check if this works:
 pipenv run python -c 'import gobanana as gb; gb.utils.hello()'
 ```
 
+## Some Useful Stuff
+[redis-py pub sub](https://github.com/andymccurdy/redis-py#publish--subscribe)
+
