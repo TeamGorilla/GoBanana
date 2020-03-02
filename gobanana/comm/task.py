@@ -1,10 +1,9 @@
 import uuid
 
-import gobanana as gb
-from gobanana.comm.data_transfer_object import DataTransferObject
+from gobanana import comm
 
 
-class Task(DataTransferObject):
+class Task(comm.DataTransferObject):
     @classmethod
     def get_id(cls):
         return str(uuid.uuid4())
@@ -15,8 +14,8 @@ class Task(DataTransferObject):
 
     @property
     def request_channel(self):
-        return gb.utils.constants.TASK_REQUEST_PREFIX + self.id
+        return comm.channels.TASK_REQUEST_PREFIX + self.id
 
     @property
     def response_channel(self):
-        return gb.utils.constants.TASK_RESPONSE_PREFIX + self.id
+        return comm.channels.TASK_RESPONSE_PREFIX + self.id

@@ -1,4 +1,3 @@
-# Redis Channels
 TASK_REQUEST_PREFIX = "request-"
 TASK_REQUEST_PATTERN = TASK_REQUEST_PREFIX + "*"
 TASK_RESPONSE_PREFIX = "response-"

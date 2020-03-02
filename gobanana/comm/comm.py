@@ -1,8 +1,5 @@
 import redis
-import json
-import uuid
 
-from gobanana.utils import constants
 from gobanana import comm
 
 
@@ -36,7 +33,7 @@ class TaskWorker(object):
         # self.channel_pattern = channel_pattern
         self.client = get_client()
         self.pubsub = self.client.pubsub()
-        self.pubsub.psubscribe(constants.TASK_REQUEST_PATTERN)
+        self.pubsub.psubscribe(comm.channels.TASK_REQUEST_PATTERN)
 
     def wait(self):
         while True:

@@ -1,7 +1,7 @@
-from gobanana.comm.data_transfer_object import DataTransferObject
+from gobanana import comm
 
 
-class TaskResponse(DataTransferObject):
+class TaskResponse(comm.DataTransferObject):
     def __init__(self, task, payload):
         super().__init__(payload)
         self.task = task
