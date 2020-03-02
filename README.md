@@ -16,3 +16,9 @@ server v=5.0.7 sha=00000000:0 malloc=libc bits=64 build=295beb9462eefd91
 ```bash
 pipenv install
 ```
+
+To check if this works:
+```bash
+pipenv run python -c 'import gobanana as gb; gb.utils.hello()'
+```
+

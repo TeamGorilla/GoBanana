@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5e8f83dbead3242b53d8c21e89e7cf579a55396073f37f43c20d7deff6335cea"
+            "sha256": "041fd99915893d744945472eaa0eb66dad4bf20be918a6c6a709f7029469e040"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -72,6 +72,10 @@
                 "sha256:c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"
             ],
             "version": "==0.3"
+        },
+        "gobanana": {
+            "editable": true,
+            "path": "."
         },
         "importlib-metadata": {
             "hashes": [
