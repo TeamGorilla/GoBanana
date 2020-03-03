@@ -18,6 +18,8 @@ ipywidgets = "*"
 pillow = "*"
 torch = "*"
 gobanana = {path = ".",editable = true}
+pytest = "*"
+jsonpickle = "*"
 
 [requires]
 python_version = "3.7"
