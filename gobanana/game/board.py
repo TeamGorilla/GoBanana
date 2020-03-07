@@ -7,8 +7,11 @@ class Board(object):
     BANANA = 2
 
     def __init__(self, mat: np.ndarray):
+        assert len(mat.shape) == 2
+        assert mat.dtype == np.int
+        assert mat.min() >= Board.ROAD
+        assert mat.max() <= Board.BANANA
         self._mat = mat
-        assert len(self._mat.shape) == 2
 
     @property
     def mat(self):
