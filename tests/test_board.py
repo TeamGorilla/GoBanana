@@ -1,7 +1,14 @@
 from gobanana import game
 
 
-def test_board():
+def test_tile_encode_decode():
+    for tile in (game.Board.WALL, game.Board.ROAD, game.Board.BANANA):
+        encoded = game.Board.encode_tile(tile)
+        decoded = game.Board.decode_tile(encoded)
+        assert decoded == tile
+
+
+def test_board_conversions():
     list_representation_board = [
         [1, 1, 1],
         [1, 0, 0],
@@ -15,4 +22,3 @@ def test_board():
     board_from_one_hot = game.Board.from_one_hot(one_hot_representation_board)
 
     assert board_from_one_hot == board_from_list
-
