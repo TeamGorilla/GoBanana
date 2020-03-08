@@ -3,7 +3,11 @@ import jsonpickle
 
 class DataTransferObject(object):
     def __init__(self, payload):
-        self.payload = payload
+        self._payload = payload
+
+    @property
+    def payload(self):
+        return self._payload
 
     def serialize(self):
         return jsonpickle.dumps(self)
