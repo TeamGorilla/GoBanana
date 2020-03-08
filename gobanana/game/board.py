@@ -95,5 +95,5 @@ class Board(np.ndarray):
 	def to_string(board):
 		"""Returns an ASCII representation of the board"""
 		vectorized_converter = np.vectorize(lambda x: Tiles(x).character)
-		convertedboard = vectorized_converter(game.board)
+		convertedboard = vectorized_converter(board)
 		return '\n'.join(''.join(row) for row in convertedboard)
