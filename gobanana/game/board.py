@@ -76,7 +76,7 @@ class Board(np.ndarray):
     	
 	@staticmethod
 	def from_string(string):
-        """Returns a Board/ndarray representation of the provided board-formatted-as-text"""
+		"""Returns a Board/ndarray representation of the provided board-formatted-as-text"""
 		lines = string.splitlines()
 		numrows = len(lines)
 		assert numrows>0, "Cannot read board from string with no lines in in it."
@@ -93,7 +93,7 @@ class Board(np.ndarray):
 
 	@staticmethod
 	def to_string(board):
-        """Returns an ASCII representation of the board"""
+		"""Returns an ASCII representation of the board"""
 		vectorized_converter = np.vectorize(lambda x: Tiles(x).character)
 		convertedboard = vectorized_converter(game.board)
 		return '\n'.join(''.join(row) for row in convertedboard)
