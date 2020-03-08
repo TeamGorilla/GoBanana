@@ -88,7 +88,7 @@ class Game():
 	
 	def __str__(self):
 		"""Represents the game board using ASCII characters"""
-		return Game.to_string_with_player(self)
+		return Game.to_string(self)
 
 	@staticmethod
 	def random_game(dims):
