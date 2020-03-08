@@ -83,10 +83,10 @@ class Board(np.ndarray):
 		numcols = len(lines[0])
 		assert all(len(lines[i]) == numcols for i in range(numrows)), "All rows should have the same length"
 
-        #Form characters into 2D ndarray
+		#Form characters into 2D ndarray
 		char_matrix = np.array([[row[col] for col in range(numcols)] for row in lines])
 
-        #Convert characters to integers
+		#Convert characters to integers
 		vectorized_converter = np.vectorize(lambda char: Tiles.from_char(char))
 		convertedboard = vectorized_converter(char_matrix)
 		return Board(convertedboard)
