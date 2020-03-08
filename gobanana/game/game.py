@@ -114,23 +114,3 @@ class Game():
 		board = np.random.choice(a=Tiles, size=dims)
 		board[(0,0)] = Tiles.FLOOR
 		return Game(board, (0,0))
-	
-	@staticmethod
-	def from_string(string):
-		lines = string.splitlines()
-		numrows = len(lines)
-		assert numrows>0, "Cannot read game from string with no lines in in it."
-		numcols = len(lines[0])
-		assert all(len(lines[i]) == numcols for i in range(numrows)), "All rows should have the same length"
-
-		char_matrix = np.array([[row[col] for col in range(numcols)] for row in lines])
-
-		vectorized_converter = np.vectorize(lambda char: Tiles.from_char(char))
-		convertedboard = vectorized_converter(char_matrix)
-		return Game(convertedboard)
-
-	@staticmethod
-	def to_string(game):
-		vectorized_converter = np.vectorize(lambda x: Tiles(x).character)
-		convertedboard = vectorized_converter(game.board)
-		return '\n'.join(''.join(row) for row in convertedboard)
