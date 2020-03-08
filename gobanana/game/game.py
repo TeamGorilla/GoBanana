@@ -82,15 +82,6 @@ class Game():
 		#Return the list of player positions resulting from valid movements
 		return attainable_positions
 
-	def child_games(self, position):
-		"""Returns the possible games that result from a player move from the given position"""
-		#Take each position resulting from valid movements and create a new corresponding game object
-		available_games = []
-		for child_position in self.child_player_positions(position):
-			available_games.append(Game(self._board))
-		#Return the list of available 
-		return available_games
-
 	def is_won(self, position):
 		"""Returns true if the game has been won (the bottom-right corner has been reached)"""
 		return position == add_tuples(self.shape, (-1, -1))
