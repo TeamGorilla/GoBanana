@@ -68,10 +68,11 @@ class Game():
 		"""Returns the position to which a player would reside were they to move."""
 		assert direction in Directions, f"The direction should be one of the directions in {list(Directions)}"
 		assert self.is_movable_direction(direction), f"Player cannot move in the provided direction, {Directions(direction)}:{direction}."
+
 		#The first step prior to banana-slipping
 		newposition = add_tuples(self._player, direction)
-		#If that step was a banana peel, keep  moving the player until they hit an invalid position
-		if self.board[newposition] == Tiles.BANANA_PEEL:
+		#If that step was a banana peel, or they started on a banana, keep moving the player until they hit an invalid position
+		if self.board[newposition] == Tiles.BANANA_PEEL or self.board[self._player] == Tiles.BANANA_PEEL:
 			nextposition = add_tuples(newposition, direction)
 			while self.is_residable(nextposition):
 				newposition = nextposition
@@ -98,6 +99,10 @@ class Game():
 			available_games.append(Game(self._board, child_position))
 		#Return the list of available 
 		return available_games
+
+	def is_won(self):
+		"""Returns true if the game has been won (the bottom-right corner has been reached)"""
+		return self._player == add_tuples(self.shape, (-1, -1))
 	
 	def __str__(self):
 		"""Represents the game using ascii characters"""
