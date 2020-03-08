@@ -3,12 +3,12 @@ import numpy as np
 from gobanana.game.tiles import Tiles
 
 class Board(np.ndarray):
-    """
-    Class to convert and track game boards. Extends ndarray.
+	"""
+	Class to convert and track game boards. Extends ndarray.
 
-    Args:
-        input_array (np.ndarray): The input array/matrix the instantiated object of this class will be the value of.
-    """
+	Args:
+		input_array (np.ndarray): The input array/matrix the instantiated object of this class will be the value of.
+	"""
 
 	##Methods for inheriting from ndarray
 
@@ -73,7 +73,7 @@ class Board(np.ndarray):
 		"""Converts a 3D board of one-hot vectors representing tiles into a 2D board of tile values"""
 		mat = np.apply_along_axis(Board.decode_tile, -1, one_hot_board).squeeze()
 		return Board(mat)
-    	
+		
 	@staticmethod
 	def from_string(string):
 		"""Returns a Board/ndarray representation of the provided board-formatted-as-text"""
