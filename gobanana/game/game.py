@@ -9,11 +9,10 @@ from gobanana.game.helpermethods import add_tuples
 
 class Game():
 	"""
-	Class to track the board and player position for a Banana Slip game
+	Class to track the board for a Banana Slip game
 
 	Args:
-		board (Board): a Board object. If not specified, dims should be specified.
-		player (Tuple<int>): The player's cordinates within the board (i.e., (0,0) is the upper-left corner; (0,1) is one spot right.)
+		board (np.ndarray): an np.ndarray object. If not specified, dims should be specified.
 	"""
 	
 	def __init__(self, board):
@@ -26,7 +25,7 @@ class Game():
 
 	@property
 	def board(self):
-		"""The representation of the underlying game board, sans the player"""
+		"""The representation of the underlying game board"""
 		return copy.deepcopy(self._board)
 
 	@property
@@ -51,8 +50,7 @@ class Game():
 
 	def is_movable_direction(self, position, direction):
 		"""
-		Returns true if the player can take a step in a given direction, where the direction is a tuple
-		representing the change in coofrom board import Boarddinates from the current position
+		Returns true if the player can take a step in a given direction from the given position, where the position and direction are tuples,
 		"""
 		newposition = add_tuples(position, direction)
 		return self.is_residable(newposition)
@@ -74,7 +72,7 @@ class Game():
 		return newposition	
 
 	def child_player_positions(self, position):
-		"""Returns the possible player positions to which a player may move from this point"""
+		"""Returns the possible player positions to which a player may move from the given position"""
 		#Check each direction the player can move in and append the position resulting from that movement to a list
 		attainable_positions = []
 		for direction in Directions:
@@ -85,11 +83,11 @@ class Game():
 		return attainable_positions
 
 	def child_games(self, position):
-		"""Returns the possible games that result from a player move from this point"""
+		"""Returns the possible games that result from a player move from the given position"""
 		#Take each position resulting from valid movements and create a new corresponding game object
 		available_games = []
 		for child_position in self.child_player_positions(position):
-			available_games.append(Game(self._board, child_position))
+			available_games.append(Game(self._board))
 		#Return the list of available 
 		return available_games
 
@@ -97,12 +95,9 @@ class Game():
 		"""Returns true if the game has been won (the bottom-right corner has been reached)"""
 		return position == add_tuples(self.shape, (-1, -1))
 	
-	def __str__(self, position):
-		"""Represents the game using ascii characters"""
-		vectorized_converter = np.vectorize(lambda x: Tiles(x).character)
-		convertedboard = vectorized_converter(self._board)
-		convertedboard[position] = '@'
-		return '\n'.join(''.join(row) for row in convertedboard)
+	def __str__(self):
+		"""Represents the game board using ASCII characters"""
+		return Board.to_string_with_player(self)
 
 	@staticmethod
 	def random_game(dims):
@@ -112,3 +107,30 @@ class Game():
 		board = np.random.choice(a=Tiles, size=dims)
 		board[(0,0)] = Tiles.FLOOR
 		return Game(board)
+
+	@staticmethod
+	def from_string(string):
+		"""Returns a Board/ndarray representation of the provided board-formatted-as-text"""
+		lines = string.splitlines()
+		numrows = len(lines)
+		assert numrows>0, "Cannot read board from string with no lines in in it."
+		numcols = len(lines[0])
+		assert all(len(lines[i]) == numcols for i in range(numrows)), "All rows should have the same length"
+
+		#Form characters into 2D ndarray
+		char_matrix = np.array([[row[col] for col in range(numcols)] for row in lines])
+
+		#Convert characters to integers
+		vectorized_converter = np.vectorize(lambda char: Tiles.from_char(char))
+		convertedboard = vectorized_converter(char_matrix)
+		return Game(convertedboard)
+
+	@staticmethod
+	def to_string(game, position=None):
+		"""Returns an ASCII representation of the board, possibly with a player at the provided position"""
+		vectorized_converter = np.vectorize(lambda x: Tiles(x).character)
+		convertedboard = vectorized_converter(game.board)
+		if position is not None:
+			assert game.is_on_board(position)
+			convertedboard[position] = '@'
+		return '\n'.join(''.join(row) for row in convertedboard)
