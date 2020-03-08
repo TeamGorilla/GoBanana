@@ -3,9 +3,9 @@ from typing import Tuple
 import copy
 import numpy as np
 
-from tiles import Tiles
-from directions import Directions
-from helpermethods import addtuples
+from gobanana.game.tiles import Tiles
+from gobanana.game.directions import Directions
+from gobanana.game.helpermethods import add_tuples
 
 class Game():
 	"""
@@ -61,7 +61,7 @@ class Game():
 		Returns true if the player can take a step in a given direction, where the direction is a tuple
 		representing the change in coofrom board import Boarddinates from the current position
 		"""
-		newposition = addtuples(self._player, direction)
+		newposition = add_tuples(self._player, direction)
 		return self.is_residable(newposition)
 
 	def moved_player(self, direction):
@@ -69,13 +69,13 @@ class Game():
 		assert direction in Directions, f"The direction should be one of the directions in {list(Directions)}"
 		assert self.is_movable_direction(direction), f"Player cannot move in the provided direction, {Directions(direction)}:{direction}."
 		#The first step prior to banana-slipping
-		newposition = addtuples(self._player, direction)
+		newposition = add_tuples(self._player, direction)
 		#If that step was a banana peel, keep  moving the player until they hit an invalid position
 		if self.board[newposition] == Tiles.BANANA_PEEL:
-			nextposition = addtuples(newposition, direction)
+			nextposition = add_tuples(newposition, direction)
 			while self.is_residable(nextposition):
 				newposition = nextposition
-				nextposition = addtuples(newposition, direction)
+				nextposition = add_tuples(newposition, direction)
 		#Return the final valid position
 		return newposition
 
