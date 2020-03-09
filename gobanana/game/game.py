@@ -18,8 +18,8 @@ class Game():
 	def __init__(self, board):
 		assert len(board.shape) == 2, f"The board's dimensionality should be 2. Instead it was {len(board.shape)}"
 		assert board.dtype == np.int, f"The elements of the board should be integers. Instead they were {board.dtype}"
-		assert board.min() >= min(Tiles), f"There are invalid tiles in the given board. The given board is {board}"
-		assert board.max() <= max(Tiles), f"There are invalid tiles in the given board. The given board is {board}"
+		assert board.min() >= min(Tiles), f"There are invalid tiles in the given board"
+		assert board.max() <= max(Tiles), f"There are invalid tiles in the given board"
 		assert all(dim>0 for dim in board.shape), f"Board dimensions must be greater than 0. Board dimensions were {self._board.shape}"
 		self._board = board
 

@@ -39,7 +39,7 @@ class StatefulGame():
 		assert len(self.shape) == len(position), f"Can only check to see if the newposition is on the board if newposition has the same number of dimensions as the board"
 		return all(0<=position[i]<self.shape[i] for i in range(len(position)))
 
-	def is_inhabitable(self, position):
+	def is_residable(self, position):
 		"""Returns true if the given location is both on the board and not a wall tile (i.e. a valid location for the player to exist)"""
 		assert len(self.shape) == len(position), f"Can only check to see if the position is on the board if position has the same number of dimensions as the board"
 		#Check whether the new position is on the board and is not a wall tile
@@ -55,7 +55,7 @@ class StatefulGame():
 		representing the change in coofrom board import Boarddinates from the current position
 		"""
 		newposition = add_tuples(position, direction)
-		return self.is_inhabitable(newposition)
+		return self.is_residable(newposition)
 
 	def moved_player(self, position, direction):
 		"""Returns the position to which a player would reside were they to move."""
@@ -67,7 +67,7 @@ class StatefulGame():
 		#If that step was a banana peel, or they started on a banana, keep moving the player until they hit an invalid position
 		if self.board[newposition] == Tiles.BANANA_PEEL or self.board[position] == Tiles.BANANA_PEEL:
 			nextposition = add_tuples(newposition, direction)
-			while self.is_inhabitable(nextposition):
+			while self.is_residable(nextposition):
 				newposition = nextposition
 				nextposition = add_tuples(newposition, direction)
 		#Return the final valid position
