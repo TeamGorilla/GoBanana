@@ -9,7 +9,9 @@ from gobanana.game.helpermethods import add_tuples
 
 class StatefulGame():
 	"""
-	Class to track the board and player position for a Banana Slip game
+	Class to track the board and player position for a Banana Slip game.
+	Unlike Game from game.py, this is a stateful class; it does not change, but its methods return new StatefulGame objects containing
+	the position of the player, which can then in turn be called upon.
 
 	Args:
 		board (np.ndarray): an np.ndarray object. If not specified, dims should be specified.
