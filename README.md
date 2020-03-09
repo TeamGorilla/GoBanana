@@ -17,8 +17,19 @@ server v=5.0.7 sha=00000000:0 malloc=libc bits=64 build=295beb9462eefd91
 pipenv install
 ```
 
-To check if this works:
+To check if `gobanana` is installed as a local package correctly:
 ```bash
 pipenv run python -c 'import gobanana as gb; gb.utils.hello()'
 ```
 
+This should give you "hello banana"
+
+To run tests:
+```bash
+python -m pytest tests
+```
+
+This should give you some green outputs.
+
+## Some Useful Stuff
+[about redis-py pub sub](https://github.com/andymccurdy/redis-py#publish--subscribe)
