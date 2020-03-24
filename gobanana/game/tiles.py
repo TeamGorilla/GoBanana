@@ -2,8 +2,8 @@ from enum import IntEnum, unique, EnumMeta
 from collections import defaultdict
 
 class TilesMeta(EnumMeta):
-	_reverse_spritename_lookup = defaultdict(lambda: -1)
-	_reverse_character_lookup = defaultdict(lambda: -1)
+	reverse_spritename_lookup = defaultdict(lambda: -1)
+	reverse_character_lookup = defaultdict(lambda: -1)
 
 @unique
 class Tiles(IntEnum, metaclass=TilesMeta):
@@ -18,13 +18,13 @@ class Tiles(IntEnum, metaclass=TilesMeta):
 
 		if spritename is not None:
 			obj.spritename = spritename
-			cls._reverse_spritename_lookup[spritename] = obj
+			cls.reverse_spritename_lookup[spritename] = obj
 		else:
 			obj.spritename = 'unknown'
 
 		if character is not None:
 			obj.character = character
-			cls._reverse_character_lookup[character] = obj
+			cls.reverse_character_lookup[character] = obj
 		else:
 			obj.character = '?'		
 		return obj	
@@ -32,12 +32,12 @@ class Tiles(IntEnum, metaclass=TilesMeta):
 	@classmethod
 	def from_sprite(cls, sprite):
 		"""Returns the tile associated with this sprite name"""
-		return cls._reverse_spritename_lookup[sprite]
+		return cls.reverse_spritename_lookup[sprite]
 	
 	@classmethod
 	def from_char(cls, char):
 		"""Returns the tile associated with this character"""
-		return cls._reverse_character_lookup[char]
+		return cls.reverse_character_lookup[char]
 
 	@classmethod
 	def values(cls):
