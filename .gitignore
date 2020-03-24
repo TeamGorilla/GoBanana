@@ -1,3 +1,6 @@
+#Custom ignores
+venv-windows/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Redis template
 # Ignore redis binary dump (dump.rdb) files
